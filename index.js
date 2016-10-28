@@ -12,9 +12,12 @@ debugger
 streamer.on('match', xml => {
   parseString(xml, (err,result) => {
     if(!result.page.redirect){
-      var outFileName = result.page.id[0].split(/:|\//).join("_");
+      var title = result.page.title[0];
+      var id = result.page.id[0];
+      var outFileName = id;
       var outPath = `${outFolder}/${outFileName}.xml`;
       fs.writeFileSync(outPath, xml);
+      console.log(`wrote: "${title}" to "${outPath}" `)
     }
   });
 });
